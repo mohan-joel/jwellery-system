@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\JwelleryType;
 use App\Models\Product;
+use App\Models\Stock;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Picqer;
@@ -74,7 +75,7 @@ class ProductController extends Controller
         $barcodeData = $request->input('barcode');
 
         //query the database to product with scanned barcode
-        $products = Product::where('barcode',$barcodeData)->first();
+        $products = Stock::where('barcode',$barcodeData)->first();
 
         if($products){
             return view('user.showProductFromBCR',compact('products','logo','year'));
