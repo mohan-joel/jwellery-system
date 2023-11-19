@@ -26,7 +26,7 @@
     <div class="container">
         <div class="register-container">
             <h2 class="text-center">Register</h2>
-            <form action="{{ route('register_user') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('register_view') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="name">Full Name</label>

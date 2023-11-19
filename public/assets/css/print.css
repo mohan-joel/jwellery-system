@@ -1,0 +1,24 @@
+ body{
+	size: A4 landscape;
+	margin:auto;
+	
+}
+
+
+#print_btn{
+	display: none;
+	visibility: none;
+}
+
+
+#btn_go_back{
+	display:none;
+	visibility:none;
+}
+
+.hide{
+	display:none;
+	visibility: none;
+}
+
+
