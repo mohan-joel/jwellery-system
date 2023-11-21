@@ -45,11 +45,6 @@
               </div>
               <div class="collapse" id="ui-basic1">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="{{ route('show-product-from-bcr') }}">Products From BCR</a></li>
-                </ul>
-              </div>
-              <div class="collapse" id="ui-basic1">
-                <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href="{{ route('weight-converter') }}">Show weight Converter</a></li>
                 </ul>
               </div>
@@ -75,6 +70,11 @@
               <div class="collapse" id="ui-basic3">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href="{{ route('show-stock') }}">Show Stock</a></li>
+                </ul>
+              </div>
+              <div class="collapse" id="ui-basic3">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="{{ route('show-sold-products') }}">Sold Products List</a></li>
                 </ul>
               </div>
             </li>
@@ -104,16 +104,28 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic6">
-                <span class="menu-title">Account Settings</span>
+                <span class="menu-title">Barcode Scan</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-crosshairs-gps menu-icon"></i>
               </a>
               <div class="collapse" id="ui-basic6">
                 <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="{{ route('scanInfo') }}">Show Barcode Scan Page</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic7">
+                <span class="menu-title">Account Settings</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+              </a>
+              <div class="collapse" id="ui-basic7">
+                <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href="{{ route('shop-details') }}">Change Shop Details</a></li>
                 </ul>
               </div>
-              <div class="collapse" id="ui-basic6">
+              <div class="collapse" id="ui-basic7">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href="{{ route('showProfileSetting') }}">Change Profile Details</a></li>
                 </ul>

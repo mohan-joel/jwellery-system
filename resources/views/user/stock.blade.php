@@ -65,79 +65,49 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <label for="date">Date</label>
                         <input type="date" class="form-control" name="date" id="date">
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <table class="table table-bordered table-light">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Jwellery Type</th>
-                                    <th>Product</th>
-                                    <th>Weight(in tola)</th>
-                                    <th>Quantity</th>
-                                    <th>CP(per tola)</th>
-                                    <th>Total</th> 
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                    <td></td>
-                                    <td>
-                                        <select name="jwellery_type_id" id="jwellery_type" class="form-control">
-                                            <option value="">Select Jwellery Type</option>
-                                            @foreach($jwelleryTypes as $jwelleryType)
-                                                <option value="{{ $jwelleryType->id }}">{{ $jwelleryType->jwellery_type_name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td>
-                                    <select name="product_id" id="product" class="form-control">
-                                            <option value="">Select Product</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" id="weight" name="weight" placeholder="Enter Weight">
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" name="added_qty" id="added_qty" placeholder="Enter Quantity">
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" name="cp" id="cp" placeholder="Enter CP">
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" name="total" id="total">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="col-md-3">
+                        <label for="jwelleryType">Jwellery Type</label>
+                        <select name="jwellery_type_id" id="jwellery_type" class="form-control">
+                                <option value="">Select Jwellery Type</option>
+                            @foreach($jwelleryTypes as $jwelleryType)
+                                <option value="{{ $jwelleryType->id }}">{{ $jwelleryType->jwellery_type_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="product">Product</label>
+                        <select name="product_id" id="product" class="form-control">
+                        <option value="">Select Product</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="quantity">Quantity</label>
+                        <input type="text" class="form-control" name="quantity" placeholder="Enter Quantity">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6"></div>
-                    <div class="col-md-6">
-                        <table class="table table-bordered table-light">
-                            <tr>
-                                <th colspan="4">TAX:</th>
-                                <td colspan="3"><input type="text" name="tax" id="tax" class="form-control">
-                            </td>
-                            </tr>
-                            <tr>
-                                <th colspan="4">Discount:</th>
-                                <td colspan="3"><input type="text" name="discount" id="discount" class="form-control">
-                            </td>
-                            </tr>
-                            <tr>
-                                <th colspan="4">Grand Total:</th>
-                                <td colspan="3"><input type="text" name="g_total" id="g_total" class="form-control"></td>      
-                            </tr>
-                        </table>
+                    <div class="col-md-3">
+                        <label for="net_wt">Net Weight (in gm)</label>
+                        <input type="text" class="form-control" id="weight" name="net_wt" placeholder=" Enter Net Weight">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="net_wt">Gross Weight (in gm)</label>
+                        <input type="text" class="form-control" id="weight" name="gross_wt" placeholder="Enter Gross Weight">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="net_wt">Stone Weight (in gm)</label>
+                        <input type="text" class="form-control" id="weight" name="stone_wt" placeholder="Enter Stone Weight">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="net_wt">Price (in Rs)</label>
+                        <input type="text" class="form-control" name="price" id="price" placeholder="Enter Price">
                     </div>
                 </div>
+                
             
            
         </div>
@@ -285,8 +255,7 @@
                             </tr>
                             <tr>
                                 <th colspan="4">Discount:</th>
-                                <td colspan="3"><input type="text" name="discount" id="discount" class="form-control">
-                            </td>
+                                <td colspan="3"><input type="text" name="discount" id="discount" class="form-control"></td>
                             </tr>
                             <tr>
                                 <th colspan="4">Grand Total:</th>
@@ -369,10 +338,8 @@
                             <th>Jwellery Type</th>
                             <th>Product </th>
                             <th>Supplier's Name</th>
-                            <th>Added Quantity</th>
-                            <th>Tax</th>
-                            <th>Discount</th>
-                            <th>Total Cost</th>
+                            <th>Quantity</th>
+                            <th>Price (in Rs)</th>
                            <th>Action</th>
                         </tr>
                     </thead>
@@ -386,9 +353,7 @@
                                 <td>{{ $stock->product->product_name }}</td>
                                 <td>@if(empty($stock->supplier_email)) {{ "No Supplier" }} @else {{ $stock->supplier->fullname }} @endif</td>
                                 <td>{{ $stock->quantity }}</td>
-                                <td>{{ $stock->tax }}</td>
-                                <td>{{ $stock->discount }}</td>
-                                <td>{{ $stock->total_cp }}</td>
+                                <td>{{ $stock->price }}</td>
                                 <td><button class="btn btn-sm btn-success" id="editStock" data-id="{{ $stock->id }}" data-bs-toggle="modal" data-bs-target=".editStockModal">Update</button><button type="button" class="btn btn-sm btn-danger deleteStock" data-bs-toggle="modal" data-bs-target="#deleteStockModal" >Delete</button><button class="btn btn-sm btn-warning showBarcode" data-id="{{ $stock->id }}" data-bs-toggle="modal" data-bs-target="#eachBarcode">Barcode</button></td>
                             </tr>
                             @endforeach
@@ -444,16 +409,7 @@
 
 
 
-               //code to insert cp in total field suddenly after key is up
-               $("#cp").keyup(function(){
-                    var cp = $(this).val();
-                    var qty = $("#added_qty").val();
-                    var weight = $("#weight").val();
-                    var total = cp*qty*weight;
-                    $("#total").val(total);
-                    $("#g_total").val(total);
-               });
-
+              
 
 
 

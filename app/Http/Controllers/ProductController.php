@@ -62,27 +62,9 @@ class ProductController extends Controller
    
 
 
-    public function showFromBCR(Request $request)
-    {
+    
 
-        //dynamic year 
-        $year = date('Y');
-        //retrieving logo of shop 
-        $uid = Auth::user()->id;
-        $logo = DB::table('shops')->where('user_id',$uid)->value('shop_logo');
-
-        //get the scanned barcode data from request
-        $barcodeData = $request->input('barcode');
-
-        //query the database to product with scanned barcode
-        $products = Stock::where('barcode',$barcodeData)->first();
-
-        if($products){
-            return view('user.showProductFromBCR',compact('products','logo','year'));
-        }else{
-            return view('user.NoProductScanned',compact('logo','year'));
-        }
-    }
+   
 
 
     public function searchProduct(Request $request)

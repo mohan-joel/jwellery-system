@@ -20,11 +20,21 @@
                         <div id="print">
                             <div class="row mt-3">
                                 @forelse($products as $product)
-                                    <div class="col-md-4 p-0 rectangle mt-2">
+                                    <div class="col-md-3 p-0 rectangle mt-2">
                                         <div class="card barcode-card">
                                             <div class="card-body editBarcode">
-                                                {!! $product->barcode !!}
-                                                <p class="text-center mt-1" style="letter-spacing:0.5em;">KGJ-{{ $product->product_code }}</p>
+                                               <div class="container">
+                                                    <div class="row justify-content-center">
+                                                        {!! $product->barcode !!}
+                                                    </div>
+                                                    <div class="row">
+                                                        <p>{{ substr($product->product->product_name,0,3) }}{{ substr($product->jwelleryType->jwellery_type_name,0,3) }}-{{ $product->product_code }}</p><p class="ml-3">Stone wt.{{ $product->stone_wt}}</p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">Net wt.{{ $product->net_wt }}</div>
+                                                        <div class="col-md-6">Gross wt.{{ $product->gross_wt }}</div>
+                                                    </div>
+                                               </div>
                                             </div>
                                         </div>
                                     </div>
