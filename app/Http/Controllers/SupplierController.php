@@ -14,7 +14,7 @@ class SupplierController extends Controller
     {
         $a = 1;
         $year = date('Y');
-        $suppliers = Supplier::all();
+        $suppliers = Supplier::paginate(5);
         $uid = Auth::user()->id;
         $logo = DB::table('shops')->where('user_id',$uid)->value('shop_logo');
         return view('user.supplier',compact('year','suppliers','a','logo'));

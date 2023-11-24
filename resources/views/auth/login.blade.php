@@ -43,7 +43,7 @@
         @endif
         <div class="login-container">
             <h2 class="text-center">Login</h2>
-            <form action="#" method="post" enctype="multipart/form-data">
+            <form action="{{ url('/login') }}" method="post" enctype="multipart/form-data">
             @csrf
                 <div class="form-group">
                     <label for="email">Email</label>

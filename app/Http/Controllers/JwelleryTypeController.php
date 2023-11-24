@@ -13,7 +13,7 @@ class JwelleryTypeController extends Controller
     public function show()
     {
         $a=1;
-        $jwelleryTypes = JwelleryType::all();
+        $jwelleryTypes = JwelleryType::paginate(5);
         $year = date('Y');
         $uid = Auth::user()->id;
         $logo = DB::table('shops')->where('user_id',$uid)->value('shop_logo');

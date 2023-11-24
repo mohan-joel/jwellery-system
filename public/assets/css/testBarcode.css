@@ -1,0 +1,97 @@
+@media print{
+    body{
+        size:A4;
+        margin:0;
+        padding:0;
+    }
+
+    .container{
+        display: flex;
+        flex-wrap:wrap;
+        text-align: center;
+        justify-content:center;
+    }
+    
+    #print_btn{
+        display:none;
+    }
+
+    #goBack_btn{
+        display:none;
+    }
+
+
+    .box {
+        margin-left:5px;
+        display: flex;
+        width: 300px; /* Adjust the width as needed */
+        height: 100px; /* Adjust the height as needed */
+        border: 1px solid #000;
+        font-size: 12px;
+        text-align: center;
+        justify-content:center;
+        margin-top:5px;
+        box-sizing: border-box;
+    }
+    
+    .barcode {
+        padding:5px;
+    }
+
+    .button-container{
+        display:none;
+    }
+}
+
+
+body{
+    size:A4;
+    margin:0;
+    padding:0;
+}
+
+.container{
+    display: flex;
+    flex-wrap:wrap;
+    text-align: center;
+    justify-content:center;
+}
+
+.box {
+    margin-left:5px;
+    display: flex;
+    width: 300px; /* Adjust the width as needed */
+    height: 100px; /* Adjust the height as needed */
+    border: 1px solid #000;
+    font-size: 12px;
+    text-align: center;
+    justify-content:center;
+    margin-top:5px;
+    box-sizing: border-box;
+}
+
+.barcode{
+    padding:5px;
+}
+
+#print_btn{
+    background-color: blue;
+    color:white;
+    height: 30px;
+    width: 80px;
+}
+
+#goBack_btn{
+    background-color: green;
+    color:white;
+    height: 30px;
+    width: 80px;
+}
+
+.button-container{
+    margin-top: 10px;
+    display:flex;
+    width:100%;
+    justify-content: center;
+    background-color: lightblue;
+}

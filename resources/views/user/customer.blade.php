@@ -91,6 +91,8 @@
                         @endif
                     </tbody>
                 </table>
+
+                {{ $customers->links()}}
             </div>
         </div>
 

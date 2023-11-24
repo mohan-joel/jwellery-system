@@ -18,7 +18,7 @@ class ProductController extends Controller
         $a=1;
         $year = date('Y');
         $jwelleryTypes = JwelleryType::all();
-        $products = Product::with('jwelleryType')->get();
+        $products = Product::with('jwelleryType')->paginate(5);
         $uid = Auth::user()->id;
         $logo = DB::table('shops')->where('user_id',$uid)->value('shop_logo');
         return view('user.product',compact('year','jwelleryTypes','a','products','logo'));

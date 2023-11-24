@@ -220,6 +220,8 @@
                @endif
             </tbody>
         </table>
+
+        {{ $suppliers->links()}}
     </div>
 </div>
 

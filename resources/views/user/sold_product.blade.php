@@ -4,7 +4,7 @@
 <div class="container">
     <h3 class="text-center">List of Sold Products</h3>
     <div class="row">
-        <table class="table table-bordered table-dark">
+        <table class="table table-bordered bg-info text-white">
             <thead>
                 <tr>
                     <th>Date</th>
@@ -36,6 +36,8 @@
                 @endif
             </tbody>
         </table>
+
+        {{ $soldProduct->links()}}
     </div>
 </div>
 

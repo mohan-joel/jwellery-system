@@ -65,6 +65,14 @@
                     </span>
                 </div>
                 <div class="form-group">
+                    <label for="role">Role</label>
+                    <select name="role" id="" class="form-control">
+                        <option value="">Select Role</option>
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="image">Image</label>
                     <input type="file" class="form-control" name="image">
                 </div>

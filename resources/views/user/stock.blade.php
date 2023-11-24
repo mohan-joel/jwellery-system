@@ -364,6 +364,9 @@
                         @endif
                     </tbody>
                 </table>
+
+                {{ $stocks->links()}}
+                
             </div>
         </div>
 

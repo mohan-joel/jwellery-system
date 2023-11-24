@@ -13,7 +13,11 @@
     
 
     #print{
+        width:100%;
         display:inline;
+    }
+    .rectangle{
+        display:flex;
     }
 
     
@@ -27,9 +31,5 @@
         visibility: none;
     }
 
-    .editBarcode{
-        width:100%;
-        margin: 0;
-        padding: 0;
-    }
+    
 }

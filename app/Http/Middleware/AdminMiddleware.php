@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class UserMiddleware
+class AdminMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,14 +17,10 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check() && Auth::user()->role == "user"){
-
-            if($request->routeIs('scanInfo')){
-                return redirect('/access-denied');
-            }
-            
-        }
+        if(Auth::check()){
             return $next($request);
-        
+        }else{
+            return redirect('/login');
+        }
     }
 }

@@ -74,14 +74,13 @@
                 <div class="card bg-gradient-warning card-img-holder text-white">
                   <div class="card-body">
                     <img src="{{ asset('assets/images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-3 text-dark">Total Sale/Orders<i class="mdi mdi-ring mdi-24px float-right"></i>
+                    <h4 class="font-weight-normal mb-3 text-dark">Total Sold Products<i class="mdi mdi-ring mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5 text-dark">{{  $saleOrder_num }}</h2>
+                    <h2 class="mb-5 text-dark"></h2>
                     <!-- <h6 class="card-text">Increased by 5%</h6> -->
                   </div>
                 </div>
               </div>
             </div>
-           
 
 @endsection

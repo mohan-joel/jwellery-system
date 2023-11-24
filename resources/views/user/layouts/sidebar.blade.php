@@ -43,11 +43,6 @@
                   <li class="nav-item"> <a class="nav-link" href="{{ route('show-product') }}">Show All Products</a></li>
                 </ul>
               </div>
-              <div class="collapse" id="ui-basic1">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="{{ route('weight-converter') }}">Show weight Converter</a></li>
-                </ul>
-              </div>
             </li>
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
@@ -79,18 +74,6 @@
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic4" aria-expanded="false" aria-controls="ui-basic4">
-                <span class="menu-title">Sale Order </span>
-                <i class="menu-arrow"></i>
-                <i class="mdi mdi-crosshairs-gps menu-icon"></i>
-              </a>
-              <div class="collapse" id="ui-basic4">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="{{ route('sale-order') }}">Show Sale Order</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic5" aria-expanded="false" aria-controls="ui-basic5">
                 <span class="menu-title">Customers</span>
                 <i class="menu-arrow"></i>
@@ -115,7 +98,7 @@
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic7">
+              <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic7" aria-expanded="false" aria-controls="ui-basic7">
                 <span class="menu-title">Account Settings</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-crosshairs-gps menu-icon"></i>

@@ -10,6 +10,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ShopController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,13 +27,13 @@ Route::get('/', function () {
 });
 
 Route::get('/login',[AuthController::class,'login_view'])->name('login_view')->middleware('guest');
-Route::get('/register',[AuthController::class,'register_view'])->name('register_view')->middleware('guest');;
+Route::get('/register',[AuthController::class,'register_view'])->name('register_view')->middleware('guest');
 
 Route::post('/login',[AuthController::class,'login']);
 Route::get('/logout',[AuthController::class,'logout'])->name('logout');
-Route::post('/register',[AuthController::class,'register'])->name('register_user')->middleware('guest');
+Route::post('/register',[AuthController::class,'register'])->name('register_user');
 
-Route::group(['middleware'=>['web','checkUser']],function(){
+Route::group(['middleware'=>['web','auth','checkAdmin','checkUser']],function(){
 
     Route::get('/dashboard',[AuthController::class,'dashboard'])->name('dashboard');
 
@@ -71,15 +72,19 @@ Route::group(['middleware'=>['web','checkUser']],function(){
     Route::post('/update-stock-details',[StockController::class,'updateStockDetails'])->name('update-stock-details');
     Route::get('/delete-stock',[StockController::class, 'delete'])->name('delete-stock');
     Route::get('/search-stock',[StockController::class,'searchStock'])->name('searchStock');
-    Route::get('/show-by-barcode/{barcode}',[StockController::class,'showFromBCR'])->name('show-product-from-bcr');
-    Route::get('/scan-info',[StockController::class,'showScanInfo'])->name('scanInfo');
+   
     Route::get('/add-product-in-stock',[StockController::class,'showInputPage']);
     Route::get('/input-by-barcode/{barcode}',[StockController::class,'inputFromBCR']);
     Route::get('/show-sold-products',[StockController::class,'showSoldProduct'])->name('show-sold-products');
+    Route::get('/get-product-by-barcode/{barcode}',[StockController::class,'getProductByBarcode']);
+    Route::get('/show-test-barcode',[StockController::class,'showTestBarcode']);
 
     //Routes for barcodes
     Route::get('/show-all-barcodes',[StockController::class,'showAllBarcodes'])->name('show-barcodes');
     Route::get('/grave-all-stock-details/{id}',[StockController::class,'showEachStockInfo']);
+    Route::get('/scan-info',[StockController::class,'showScanInfo'])->name('scanInfo');
+  
+    
 
     //Routes for customers
     Route::get('/show-customers',[CustomerController::class,'show'])->name('show-customers');
@@ -115,4 +120,15 @@ Route::group(['middleware'=>['web','checkUser']],function(){
     Route::get('/get-editCustomers-details/{id}',[SaleOrderController::class,'getEditCustomerDetail']);
 
 
+    Route::get('/access-denied',[AuthController::class,'accessDenied']);
+
+   
+
+
 });
+
+
+
+
+
+

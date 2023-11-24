@@ -197,6 +197,8 @@
                         @endif
                     </tbody>
                 </table>
+
+                {{ $products->links()}}
             </div>
         </div>
 

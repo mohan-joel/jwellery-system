@@ -21,7 +21,7 @@ class StockController extends Controller
         $year = date('Y');
         $suppliers = Supplier::all();
         $jwelleryTypes = JwelleryType::all();
-        $stocks = Stock::with('jwelleryType','product','supplier')->get();
+        $stocks = Stock::with('jwelleryType','product','supplier')->paginate(5);
         $uid = Auth::user()->id;
         $logo = DB::table('shops')->where('user_id',$uid)->value('shop_logo');
         return view('user.stock',compact('year','suppliers','jwelleryTypes','stocks','a','logo'));
@@ -63,6 +63,8 @@ class StockController extends Controller
         $stock->net_wt = $request->net_wt;
         $stock->gross_wt = $request->gross_wt;
         $stock->price = $request->price;
+        $stock->quantity = $request->quantity;
+        $stock->stone_wt = $request->stone_wt;
         $product_code = mt_rand(11111,99999);
         $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
         $barcode = $generator->getBarcode($product_code,
@@ -81,36 +83,6 @@ class StockController extends Controller
         }
 
         return redirect('/stocks')->with('success','Stock Added Successfully');
-    }
-
-
-    public function showFromBCR($barcode)
-    {
-
-        //dynamic year 
-        $year = date('Y');
-        //retrieving logo of shop 
-        $uid = Auth::user()->id;
-        $logo = DB::table('shops')->where('user_id',$uid)->value('shop_logo');
-
-       
-
-        //query the database to product with scanned barcode
-        $products = Stock::with('jwelleryType','product')->where('product_code',$barcode)->first();
-
-        if($products->quantity > 1)
-        {
-            $products->quantity = $products->quantity - 1;
-            $products->update();
-            ProductSold::create($products->toArray());
-        }elseif($products->quantity == 1)
-        {
-            ProductSold::create($products->toArray());
-            $products->delete();
-        }
-
-         return redirect('/scan-info')->with('success','Product is sold');
-        
     }
 
     public function showInputPage()
@@ -218,13 +190,62 @@ class StockController extends Controller
         ]);
     }
 
+    public function showTestBarcode()
+    {
+        $products = Stock::all();
+        return view('user.testBarcode',compact('products'));
+    }
+
 
     public function showSoldProduct()
     {
         $year = date('Y');
         $uid = Auth::user()->id;
         $logo = DB::table('shops')->where('user_id',$uid)->value('shop_logo');
-        $soldProduct = ProductSold::with('jwelleryType','product')->get();
+        $soldProduct = ProductSold::with('jwelleryType','product')->paginate(10);
         return view('user.sold_product',compact('soldProduct','year','logo'));
     }
+
+
+    public function getProductByBarcode($barcode)
+    {
+        try {
+            // Your code here
+           
+
+            $product = Stock::with('jwelleryType','product')->where('product_code', $barcode)->first();
+
+            if($product->quantity > 1)
+            {
+                $product->quantity = $product->quantity - 1;
+                $product->update();
+            }elseif($product->quantity == 1)
+            {
+                $product->delete();
+            }
+
+            if($product){
+                ProductSold::create([
+                    'jwelleryType_id'=> $product->jwelleryType_id,
+                    'product_id'=>$product->product_id,
+                    'net_wt'=>$product->net_wt,
+                    'gross_wt'=>$product->gross_wt,
+                    'stone_wt'=>$product->stone_wt,
+                    'price'=>$product->price,
+                ]);
+            }
+
+            return response()->json([
+                'data'=>$product,
+                'msg'=>'Product is Sold'
+            ]);
+
+        } catch (\Exception $e) {
+            \Log::error($e->getMessage());
+            return response()->json(['error' => 'Internal Server Error'], 500);
+        }
+       
+    }
+
+   
 }

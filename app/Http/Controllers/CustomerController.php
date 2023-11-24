@@ -16,7 +16,7 @@ class CustomerController extends Controller
     {
         $a =1;
         $year = date('Y');
-        $customers = Customer::all();
+        $customers = Customer::paginate(5);
         $uid = Auth::user()->id;
         $logo = DB::table('shops')->where('user_id',$uid)->value('shop_logo');
         return view('user.customer',compact('a','year','customers','logo'));

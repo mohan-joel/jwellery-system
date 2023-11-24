@@ -22,9 +22,7 @@ class AuthController extends Controller
 {
     public function login_view()
     {
-        if(Auth::user()){
-            return redirect('/dashboard');
-        }
+        
         return view('auth.login');
     }
 
@@ -40,6 +38,7 @@ class AuthController extends Controller
             'email'=>'required|email|unique:users',
             'password'=>'required|min:8',
             'confirm_password'=>'required|string',
+            'role'=>'required|string',
             'image'=>'required|image|mimes:jpg,jpeg,png,gif|max:2048'
         ]);
 
@@ -49,6 +48,7 @@ class AuthController extends Controller
         $user->name = $req->name;
         $user->email = $req->email;
         $user->password = Hash::make($req->password);
+        $user->role = $req->role;
         if($req->file('image')->isValid()){
             $profilePic = $req->file('image');
             $newProfilePic = $req->file('image')->getClientOriginalName();
@@ -72,6 +72,7 @@ class AuthController extends Controller
         ]);
 
         $UserCredentials = $req->only('email','password');
+
         if(Auth::attempt($UserCredentials)){
             return redirect('/dashboard');
         }else{
@@ -90,8 +91,15 @@ class AuthController extends Controller
         $product_num = Product::count();
         $customer_num = Customer::count();
         $stock_num = Stock::count();
-        $saleOrder_num = SaleOrder::count();
-        return view('user.dashboard',compact('year','logo','jwelleryType_num','supplier_num','product_num','customer_num','stock_num','saleOrder_num'));
+        return view('user.dashboard',compact('year','logo','jwelleryType_num','supplier_num','product_num','customer_num','stock_num'));
+    }
+
+    public function accessDenied()
+    {
+        $year = date('Y');
+        $uid = Auth::user()->id;
+        $logo = DB::table('shops')->where('user_id',$uid)->value('shop_logo');
+        return view('user.access_denied',compact('year','logo'));
     }
 
     public function logout()
@@ -99,4 +107,7 @@ class AuthController extends Controller
         Auth::logout();
         return redirect('/login');
     }
+
+
+    
 }
