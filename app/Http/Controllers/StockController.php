@@ -24,7 +24,10 @@ class StockController extends Controller
         $stocks = Stock::with('jwelleryType','product','supplier')->paginate(5);
         $uid = Auth::user()->id;
         $logo = DB::table('shops')->where('user_id',$uid)->value('shop_logo');
-        return view('user.stock',compact('year','suppliers','jwelleryTypes','stocks','a','logo'));
+        $sum_netWt = Stock::sum('net_wt');
+        $sum_grossWt = Stock::sum('gross_wt');
+        $sum_stoneWt = Stock::sum('stone_wt');
+        return view('user.stock',compact('year','suppliers','jwelleryTypes','stocks','a','logo','sum_netWt','sum_grossWt','sum_stoneWt'));
     }
 
     public function getSuppliersInfo($id)
@@ -56,14 +59,14 @@ class StockController extends Controller
     public function addStockDetails(Request $request)
     {
         $stock = new Stock();
-        $stock->date = $request->date;
+        $stock->date = date('Y-m-d');
         $stock->supplier_email = $request->supplier_email;
         $stock->jwelleryType_id = $request->jwellery_type_id;
         $stock->product_id = $request->product_id;
         $stock->net_wt = $request->net_wt;
         $stock->gross_wt = $request->gross_wt;
         $stock->price = $request->price;
-        $stock->quantity = $request->quantity;
+        $stock->serial_num = $request->serial_num;
         $stock->stone_wt = $request->stone_wt;
         $product_code = mt_rand(11111,99999);
         $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
@@ -85,12 +88,49 @@ class StockController extends Controller
         return redirect('/stocks')->with('success','Stock Added Successfully');
     }
 
-    public function showInputPage()
+    public function showSaleBySerialNumPage()
     {
         $year = date('Y');
         $uid = Auth::user()->id;
         $logo = DB::table('shops')->where('user_id',$uid)->value('shop_logo');
-        return view('user.scanToInput',compact('year','logo'));
+        return view('user.saleBySerialNum',compact('year','logo'));
+
+    }
+
+    public function sellBySerialNum(Request $request)
+    {
+        $serialNum = $request->serial_num;
+        $stock = Stock::where('serial_num',$serialNum)->first();
+
+        if ($stock) {
+            // Save the values before deleting the record
+            $jwelleryType_id = $stock->jwelleryType_id;
+            $product_id = $stock->product_id;
+            $net_wt = $stock->net_wt;
+            $gross_wt = $stock->gross_wt;
+            $stone_wt = $stock->stone_wt;
+            $price = $stock->price;
+    
+            // Delete the record
+            $stock->delete();
+    
+            // Create a new record using the saved values
+            ProductSold::create([
+                'jwelleryType_id'=> $stock->jwelleryType_id,
+                'product_id'=>$stock->product_id,
+                'net_wt'=>$stock->net_wt,
+                'gross_wt'=>$stock->gross_wt,
+                'stone_wt'=>$stock->stone_wt,
+                'price'=>$stock->price,
+            ]);
+    
+            // Additional logic...
+    
+            return redirect()->back()->with('success', 'Product Sold');
+        } else {
+            return redirect()->back()->with('error', 'Product not found');
+        }
+
     }
 
     public function inputFromBCR($barcode)
@@ -214,15 +254,8 @@ class StockController extends Controller
            
 
             $product = Stock::with('jwelleryType','product')->where('product_code', $barcode)->first();
-
-            if($product->quantity > 1)
-            {
-                $product->quantity = $product->quantity - 1;
-                $product->update();
-            }elseif($product->quantity == 1)
-            {
-                $product->delete();
-            }
+            $product->delete();
+    
 
             if($product){
                 ProductSold::create([
@@ -245,6 +278,22 @@ class StockController extends Controller
             return response()->json(['error' => 'Internal Server Error'], 500);
         }
        
+    }
+
+    public function getSerialNums()
+    {
+        $serialNum = Stock::pluck('serial_num');
+        return response()->json([
+            'data'=>$serialNum,
+        ]);
+    }
+
+    public function getAllJwelleryType()
+    {
+        $allJwelleryType = JwelleryType::all();
+        return response()->json([
+            'data'=>$allJwelleryType,
+        ]);
     }
 
    

@@ -66,10 +66,6 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3">
-                        <label for="date">Date</label>
-                        <input type="date" class="form-control" name="date" id="date">
-                    </div>
-                    <div class="col-md-3">
                         <label for="jwelleryType">Jwellery Type</label>
                         <select name="jwellery_type_id" id="jwellery_type" class="form-control">
                                 <option value="">Select Jwellery Type</option>
@@ -85,8 +81,9 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <label for="quantity">Quantity</label>
-                        <input type="text" class="form-control" name="quantity" placeholder="Enter Quantity">
+                        <label for="quantity">Serial No.</label>
+                        <input type="text" class="form-control" name="serial_num" id="serial_num" placeholder="Enter Serial No.">
+                        <span id="show_serialNum"></span>
                     </div>
                 </div>
                 <div class="row">
@@ -102,14 +99,7 @@
                         <label for="net_wt">Stone Weight (in gm)</label>
                         <input type="text" class="form-control" id="weight" name="stone_wt" placeholder="Enter Stone Weight">
                     </div>
-                    <div class="col-md-3">
-                        <label for="net_wt">Price (in Rs)</label>
-                        <input type="text" class="form-control" name="price" id="price" placeholder="Enter Price">
-                    </div>
-                </div>
-                
-            
-           
+                </div> 
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -145,136 +135,7 @@
 
 
 
-<!-- bootstrap modal to edit stock -->
-<div class="modal fade editStockModal"  tabindex="-1" role="dialog" aria-labelledby="editStockModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-    <form method="post" action="{{ route('update-stock-details') }}">
-        @csrf
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Edit Stock</h5>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">  
-                <div class="row">
-                    <div class="container alert alert-primary alert-dismissible fade show">
-                        <div class="row">
-                            <div class="col-md-6">
-                            <button type="button" class="btn btn-warning" id="editadd_supplier">New Suppliers</button><button type="button" class="btn btn-secondary" id="editselect_supplier">Old Supplier</button>
-                                <select name="supplier_id" id="editinput_select_supplier" class="form-control editsupplier_id"  style="display:none;">
-                                <option value="">Select Supplier</option>
-                                    @foreach($suppliers as $supplier)
-                                        <option value="{{ $supplier->id }}">{{ $supplier->fullname }}</option>
-                                    @endforeach
-                                </select>
-                                <input type="text" name="=supplier_name" class="form-control" id="editinput_add_supplier" placeholder="Enter Supplier's Name" style="display:none;">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="supplier_email">Supplier's Email</label>
-                                <input type="email" name="supplier_email" id="editsupplier_email" class="form-control" placeholder="Enter Supplier's Email">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="supplier_contact">Supplier's Contact</label>
-                                <input type="text" class="form-control" name="supplier_contact" id="editsupplier_contact" placeholder="Enter Supplier's Contact">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="supplier_address">Supplier's Address</label>
-                                <input type="text" class="form-control" name="supplier_address" id="editsupplier_address" placeholder="Enter Supplier's Address">
-                            </div>
-                        </div>
-                        <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="date">Date</label>
-                        <input type="date" class="form-control" name="date" id="date">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <table class="table table-bordered table-light">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Jwellery Type</th>
-                                    <th>Product</th>
-                                    <th>Weight(in tola)</th>
-                                    <th>Quantity</th>
-                                    <th>CP(per tola)</th>
-                                    <th>Total</th> 
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                    <td></td>
-                                    <td>
-                                        <select name="jwellery_type_id" id="editJwellery_type" class="form-control">
-                                            <option value="">Select Jwellery Type</option>
-                                            @foreach($jwelleryTypes as $jwelleryType)
-                                                <option value="{{ $jwelleryType->id }}">{{ $jwelleryType->jwellery_type_name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td>
-                                    <select name="product_id" id="editProduct" class="form-control">
-                                            <option value="">Select Product</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" id="editWeight" name="weight" placeholder="Enter Weight">
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" name="added_qty" id="editQuantity" placeholder="Enter Quantity">
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" name="cp" id="cp" placeholder="Enter CP">
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" name="total" id="total">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6"></div>
-                    <div class="col-md-6">
-                        <table class="table table-bordered table-light">
-                            <tr>
-                                <th colspan="4">TAX:</th>
-                                <td colspan="3"><input type="text" name="tax" id="tax" class="form-control">
-                            </td>
-                            </tr>
-                            <tr>
-                                <th colspan="4">Discount:</th>
-                                <td colspan="3"><input type="text" name="discount" id="discount" class="form-control"></td>
-                            </tr>
-                            <tr>
-                                <th colspan="4">Grand Total:</th>
-                                <td colspan="3"><input type="text" name="g_total" id="g_total" class="form-control"></td>      
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            
-           
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Add</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+
 
 <!-- Modal for deleting stock -->
 <div class="modal fade" id="deleteStockModal" tabindex="-1" role="dialog" aria-labelledby="deleteStockModalLabel" aria-hidden="true">
@@ -300,33 +161,6 @@
   </div>
 </div>
 
-
-<!-- Modal to show each barcode-->
-<div class="modal fade" id="eachBarcode" tabindex="-1" aria-labelledby="eachBarcodeLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Barcode of <span id="product_code"></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-         <div class="card">
-            <div class="card-body">
-                <div class="row showEachbarcode"></div>
-                <p style="letter-spacing:0.5em;">KGJ- <span id="eachProductCode"></span></p>
-            </div>
-         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="window.print()">Print</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
         <hr>
         <div class="container">
             <div class="col-md-12">
@@ -337,9 +171,10 @@
                             <th>Date</th>
                             <th>Jwellery Type</th>
                             <th>Product </th>
-                            <th>Supplier's Name</th>
-                            <th>Quantity</th>
-                            <th>Price (in Rs)</th>
+                            <th>Serial No.</th>
+                            <th>Net Wt(in gm)</th>
+                            <th>Gross Wt(in gm)</th>
+                            <th>Stone Wt(in gm)</th>
                            <th>Action</th>
                         </tr>
                     </thead>
@@ -351,12 +186,20 @@
                                 <td>{{ $stock->date }}</td>
                                 <td>{{ $stock->jwelleryType->jwellery_type_name }}</td>
                                 <td>{{ $stock->product->product_name }}</td>
-                                <td>@if(empty($stock->supplier_email)) {{ "No Supplier" }} @else {{ $stock->supplier->fullname }} @endif</td>
-                                <td>{{ $stock->quantity }}</td>
-                                <td>{{ $stock->price }}</td>
-                                <td><button class="btn btn-sm btn-success" id="editStock" data-id="{{ $stock->id }}" data-bs-toggle="modal" data-bs-target=".editStockModal">Update</button><button type="button" class="btn btn-sm btn-danger deleteStock" data-bs-toggle="modal" data-bs-target="#deleteStockModal" >Delete</button><button class="btn btn-sm btn-warning showBarcode" data-id="{{ $stock->id }}" data-bs-toggle="modal" data-bs-target="#eachBarcode">Barcode</button></td>
+                                <td>{{ $stock->serial_num }}</td>
+                                <td>{{ $stock->net_wt }}</td>
+                                <td>{{ $stock->gross_wt }}</td>
+                                <td>{{ $stock->stone_wt }}</td>
+                                <td><button class="btn btn-sm btn-success" id="editStock" data-id="{{ $stock->id }}" data-bs-toggle="modal" data-bs-target=".editStockModal">Update</button><button type="button" class="btn btn-sm btn-danger deleteStock" data-bs-toggle="modal" data-bs-target="#deleteStockModal" >Delete</button></td>
                             </tr>
                             @endforeach
+                            <tr>
+                                <th colspan="5">Grand Total Weights</th>
+                                <th>{{ $sum_netWt }}</th>
+                                <th>{{ $sum_grossWt }}</th>
+                                <th>{{ $sum_stoneWt }}</th>
+                                <th></th>
+                            </tr>
                         @else
                             <tr>
                                 <td colspan="10" class="text-danger text-center">No Products Found</td>
@@ -621,7 +464,21 @@
                    
             });
 
-           
+
+           $(document).on("click","#serial_num",function(){
+                $.ajax({
+                    url:"/get-serial-numbers",
+                    type:"get",
+                    dataType:"json",
+                    success:function(response){
+                        $("#show_serialNum").text(response.data);
+                    }
+                });
+
+                $("#serial_num").keyup(function(){
+                    $("#show_serialNum").hide();
+                });
+            });  
         </script>
         
 

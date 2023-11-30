@@ -29,7 +29,6 @@
                         <div class="col-md-6">
                             <label for="barcode">Scan Barcode:</label>
                             <input type="text" id="barcode" name="barcode" class="form-control">
-                            <button type="submit" style="display:none;"></button>
                         </div>
                     </div>
                 </div>
@@ -83,7 +82,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="quantity">Remaining Quantity</label>
+                            <label for="quantity">Serial Number</label>
                             <input type="text" id="quantity" class="form-control">
                         </div>
                     </div>
@@ -95,7 +94,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4"><a href="{{ url('/add-product-in-stock') }}">Click Here To Add Product</a></div>
+        <div class="col-md-4"><a href="{{ url('/sale-by-serial-num') }}">Click Here To Sale by Serial No.</a></div>
     </div>
 </div>
 
@@ -118,7 +117,7 @@
                     $("#stone_wt").val(response.data['stone_wt']);
                     $("#price").val(response.data['price']);
                     $("#product_code").val(response.data['product_code']);
-                    $("#quantity").val(response.data['quantity']);
+                    $("#quantity").val(response.data['serial_num']);
                     $(".successMsg").show();
                     $(".successMsg").text(response.msg);
 

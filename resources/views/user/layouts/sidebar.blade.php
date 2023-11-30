@@ -87,13 +87,18 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic6">
-                <span class="menu-title">Barcode Scan</span>
+                <span class="menu-title">Sell Jwelleries</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-crosshairs-gps menu-icon"></i>
               </a>
               <div class="collapse" id="ui-basic6">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="{{ route('scanInfo') }}">Show Barcode Scan Page</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{{ route('scanInfo') }}">Using Barcode</a></li>
+                </ul>
+              </div>
+              <div class="collapse" id="ui-basic6">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="{{ route('sellBySerialNum') }}">Using Serial Number</a></li>
                 </ul>
               </div>
             </li>

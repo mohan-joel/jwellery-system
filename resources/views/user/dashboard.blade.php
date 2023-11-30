@@ -19,8 +19,13 @@
                 <div class="card bg-gradient-danger card-img-holder text-white">
                   <div class="card-body">
                     <img src="{{ asset('assets/images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-3 text-dark">Jwellery Type<i class="mdi mdi-diamond mdi-24px float-right"></i>
-                    </h4>
+                    <!-- <h4 class="font-weight-normal mb-3 text-dark" id="jwelleryTypes">Jwellery Type<i class="mdi mdi-diamond mdi-24px float-right"></i>
+                    </h4> -->
+                     <!-- Button to trigger the popover -->
+                    <button type="button" class="btn btn-primary" id="jwellery_type">Jwellery Types</button>
+                    <div class="container items" style:"display:none;">
+                        
+                    </div>
                     <h2 class="mb-5 text-dark">{{ $jwelleryType_num }}</h2>
                     <!-- <h6 class="card-text">Increased by 60%</h6> -->
                   </div>
@@ -82,5 +87,30 @@
                 </div>
               </div>
             </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+   $(document).ready(function(){
+      $("#jwellery_type").click(function(){
+          $.ajax({
+               url:"/get-all-jwellerytype",
+               type:"get",
+               dataType:"json",
+               success:function(response){
+                  var items = response.data;
+                  console.log(items);
+                  var popoverContent = `<ul class="list-unstyled">`;
+                  for (var i = 0; i < items.length; i++) {
+                      popoverContent += `<li><a href="#" class="jewelleryType" data-id="${items[i].id}">${items[i]['jwellery_type_name']}</a></li>`;
+                  }
+                  popoverContent += `</ul>`;
+                  $(".items").html(popoverContent);
+                  $(".items").show();
+               }
+          });
+      });
+   });
+</script>
 
 @endsection

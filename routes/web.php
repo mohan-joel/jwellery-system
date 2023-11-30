@@ -72,12 +72,14 @@ Route::group(['middleware'=>['web','auth','checkAdmin','checkUser']],function(){
     Route::post('/update-stock-details',[StockController::class,'updateStockDetails'])->name('update-stock-details');
     Route::get('/delete-stock',[StockController::class, 'delete'])->name('delete-stock');
     Route::get('/search-stock',[StockController::class,'searchStock'])->name('searchStock');
-   
-    Route::get('/add-product-in-stock',[StockController::class,'showInputPage']);
     Route::get('/input-by-barcode/{barcode}',[StockController::class,'inputFromBCR']);
     Route::get('/show-sold-products',[StockController::class,'showSoldProduct'])->name('show-sold-products');
     Route::get('/get-product-by-barcode/{barcode}',[StockController::class,'getProductByBarcode']);
     Route::get('/show-test-barcode',[StockController::class,'showTestBarcode']);
+    Route::get('/sale-by-serial-num',[StockController::class,'showSaleBySerialNumPage'])->name('sellBySerialNum');
+    Route::post('/sell-by-using-serial-num',[StockController::class,'sellBySerialNum'])->name('sellByUsingSerialNum');
+    Route::get("/get-serial-numbers",[StockController::class,'getSerialNums']);
+    Route::get('/get-all-jwellerytype',[StockController::class,'getAllJwelleryType']);
 
     //Routes for barcodes
     Route::get('/show-all-barcodes',[StockController::class,'showAllBarcodes'])->name('show-barcodes');

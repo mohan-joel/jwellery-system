@@ -19,7 +19,7 @@ class UserMiddleware
     {
         if(Auth::check() && Auth::user()->role == "user"){
 
-            if($request->routeIs('scanInfo')){
+            if($request->routeIs('scanInfo','sellBySerialNum')){
                 return redirect('/access-denied');
             }
             
