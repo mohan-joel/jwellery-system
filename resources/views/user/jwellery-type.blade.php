@@ -150,7 +150,7 @@
                @foreach($jwelleryTypes as $jwelleryType)
                <tr>
                     <td>{{ $a++ }}</td>
-                    <td>{{ $jwelleryType->jwellery_type_name }}</td>
+                    <td><a href="{{ url('/product/'.$jwelleryType->id ) }}">{{ $jwelleryType->jwellery_type_name }}</a></td>
                     <td><button type="button" class="btn btn-success editJwelleryType" data-id="{{ $jwelleryType->id }}" data-jwelleryType="{{ $jwelleryType->jwellery_type_name }}" data-bs-toggle="modal" data-bs-target="#editJwelleryTypeNameModal">Update</button><button type="button" class="btn btn-danger deleteJwelleryType" data-id="{{ $jwelleryType->id }}" data-name="{{ $jwelleryType->jwellery_type_name }}" data-bs-toggle="modal" data-bs-target="#deleteJwelleryTypeModal">Delete</button></td>
                 </tr>
                @endforeach

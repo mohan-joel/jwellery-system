@@ -59,14 +59,6 @@ class ProductController extends Controller
         return redirect('/product')->with('success','Product Updated Successfully');
     }
 
-   
-
-
-    
-
-   
-
-
     public function searchProduct(Request $request)
     {
         $a=1;
@@ -77,6 +69,20 @@ class ProductController extends Controller
         $product = $request->product;
         $products = Product::where('product_name','like','%'.$product.'%')->get();
         return view('user.product',compact('a','year','logo','products','jwelleryTypes'));
+    }
+
+    public function findProductInStock($id)
+    {
+        $a=1;
+        $year = date('Y');
+        $uid = Auth::user()->id;
+        $logo = DB::table('shops')->where('user_id',$uid)->value('shop_logo');
+        $jwellery_type_name = JwelleryType::find($id);
+        $sum_netWt = Stock::where('jwellerytype_id',$id)->sum('net_wt');
+        $sum_grossWt = Stock::where('jwellerytype_id',$id)->sum('gross_wt');
+        $sum_stoneWt = Stock::where('jwellerytype_id',$id)->sum('stone_wt');
+        $product = Stock::where('jwellerytype_id',$id)->with('product')->get();
+        return view('user.product_list_in_stock',compact('a','year','logo','product','sum_netWt','sum_grossWt','sum_stoneWt','jwellery_type_name'));
     }
    
 }

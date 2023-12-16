@@ -9,6 +9,8 @@ use App\Http\Controllers\StockController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\ResetPasswordController;
 
 
 /*
@@ -33,6 +35,11 @@ Route::post('/login',[AuthController::class,'login']);
 Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 Route::post('/register',[AuthController::class,'register'])->name('register_user');
 
+Route::get('forgot-password',[ForgotPasswordController::class,'show'])->name('forgot-password');
+Route::post('/forgot-password-handler',[ForgotPasswordController::class,'ForgotHandler'])->name('forgot-password-handler');
+Route::get('/password/reset/{token}',[ResetPasswordController::class,'ResetForm'])->name('auth.reset-form');
+Route::post('/reset/password/handler',[ResetPasswordController::class,'ResetHandler'])->name('reset-password-form-handler');
+
 Route::group(['middleware'=>['web','auth','checkAdmin','checkUser']],function(){
 
     Route::get('/dashboard',[AuthController::class,'dashboard'])->name('dashboard');
@@ -51,6 +58,7 @@ Route::group(['middleware'=>['web','auth','checkAdmin','checkUser']],function(){
     Route::put('/update-product',[ProductController::class,'update'])->name('update-product');
     Route::put('/delete-product',[ProductController::class,'delete'])->name('delete-product');
     Route::get('/search-product',[ProductController::class,'searchProduct'])->name('searchProduct');
+    Route::get('/product/{id}',[ProductController::class,'findProductInStock'])->name('findProductInStock');
     
 
     //Routes for suppliers
@@ -80,11 +88,13 @@ Route::group(['middleware'=>['web','auth','checkAdmin','checkUser']],function(){
     Route::post('/sell-by-using-serial-num',[StockController::class,'sellBySerialNum'])->name('sellByUsingSerialNum');
     Route::get("/get-serial-numbers",[StockController::class,'getSerialNums']);
     Route::get('/get-all-jwellerytype',[StockController::class,'getAllJwelleryType']);
+    Route::get('/export/stocks',[StockController::class,'export'])->name('stock-export');
 
     //Routes for barcodes
     Route::get('/show-all-barcodes',[StockController::class,'showAllBarcodes'])->name('show-barcodes');
     Route::get('/grave-all-stock-details/{id}',[StockController::class,'showEachStockInfo']);
     Route::get('/scan-info',[StockController::class,'showScanInfo'])->name('scanInfo');
+    Route::get('/individual-barcode/{id}',[StockController::class,'individualBarcode'])->name('individual-barcode');
   
     
 

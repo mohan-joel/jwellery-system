@@ -19,13 +19,13 @@ return new class extends Migration
             $table->string('supplier_email')->nullable();
             $table->unsignedBigInteger('jwelleryType_id');
             $table->unsignedBigInteger('product_id');
-            $table->float('weight',8,2);
-            $table->integer('quantity');
-            $table->float('tax',5,2)->nullable();
-            $table->float('discount',5,2)->nullable();
+            $table->string('serial_num');
             $table->string('product_code')->nullable();
             $table->text('barcode')->nullable();
-            $table->float('total_cp',8,2);
+            $table->text('net_wt');
+            $table->text('gross_wt');
+            $table->text('stone_wt');
+            $table->text('price')->nullable();
             $table->timestamps();
         });
     }

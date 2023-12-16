@@ -10,13 +10,15 @@ class Stock extends Model
     use HasFactory;
     protected $fillable = [
         'date',
-        'supplier_id',
+        'supplier_email',
         'jwelleryType_id',
         'product_id',
-        'added_qty',
-        'tax',
-        'discount',
-        'grand_total'
+        'product_code',
+        'barcode',
+        'serial_num',
+        'net_wt',
+        'gross_wt',
+        'stone_wt',
     ];
 
     public function jwelleryType()

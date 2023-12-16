@@ -132,6 +132,16 @@
     </div>
 </div>
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+        <a href="{{ route('stock-export') }}" class="btn btn-sm btn-secondary">Export To Excel</a>
+        </div>
+    </div>
+</div>
+
 
 
 
@@ -190,7 +200,7 @@
                                 <td>{{ $stock->net_wt }}</td>
                                 <td>{{ $stock->gross_wt }}</td>
                                 <td>{{ $stock->stone_wt }}</td>
-                                <td><button class="btn btn-sm btn-success" id="editStock" data-id="{{ $stock->id }}" data-bs-toggle="modal" data-bs-target=".editStockModal">Update</button><button type="button" class="btn btn-sm btn-danger deleteStock" data-bs-toggle="modal" data-bs-target="#deleteStockModal" >Delete</button></td>
+                                <td><button class="btn btn-sm btn-success" id="editStock" data-id="{{ $stock->id }}" data-bs-toggle="modal" data-bs-target=".editStockModal">Update</button><button type="button" class="btn btn-sm btn-danger deleteStock" data-bs-toggle="modal" data-bs-target="#deleteStockModal" >Delete</button><a href="{{ url('/individual-barcode/'.$stock->id )}}" class="btn btn-sm btn-primary">Show Barcode</a></td>
                             </tr>
                             @endforeach
                             <tr>

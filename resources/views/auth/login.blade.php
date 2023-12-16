@@ -24,15 +24,6 @@
 </head>
 <body>
     <div class="container">
-            @if (Session::has('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ Session::get('success') }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        @endif
-
         @if (Session::has('error'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ Session::get('error') }}
@@ -41,6 +32,12 @@
                 </button>
             </div>
         @endif
+
+        @if(Session::get('success'))
+        <div class="alert alert-danger">
+            {{ Session::get('success') }}
+        </div>
+         @endif
         <div class="login-container">
             <h2 class="text-center">Login</h2>
             <form action="{{ url('/login') }}" method="post" enctype="multipart/form-data">
@@ -62,7 +59,9 @@
                         {{ $message }}
                         @enderror
                     </span>
+                        
                 </div>
+                <a href="{{ route('forgot-password') }}" class="float-right">I forgot password</a>
                 <button type="submit" class="btn btn-primary btn-block">Login</button>
             </form>
             <p class="mt-3 text-center"> <a href="{{ url('/register') }}">Register</a></p>

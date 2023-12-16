@@ -8,6 +8,8 @@ use App\Models\JwelleryType;
 use App\Models\Product;
 use App\Models\Stock;
 use App\Models\ProductSold;
+use App\Exports\StockExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Picqer;
@@ -294,6 +296,17 @@ class StockController extends Controller
         return response()->json([
             'data'=>$allJwelleryType,
         ]);
+    }
+
+    public function individualBarcode($id)
+    {
+        $product = Stock::find($id);
+        return view('user.individual-barcode',compact('product'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new StockExport, 'exported_stocks.xlsx');
     }
 
    

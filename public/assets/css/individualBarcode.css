@@ -1,12 +1,19 @@
-@media print{
+body {
+    font-size: 16px;
+}
 
-    body{
-        size:A4;
-        margin:0;
-        padding:0;
+@media print {
+
+    body {
+        font-size: 12px;
+    }
+    @page {
+        size: 4in 6in;
+        margin: 0;
     }
 
-    .container{
+
+     .container{
         display: flex;
         flex-wrap:wrap;
         text-align: center;
